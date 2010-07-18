@@ -34,8 +34,27 @@ public class UpdateStatusTask extends AbstractTask {
     private IdenticaController controller;
     private IdenticaApi api;
     private String status;
+    private String inReplyTo;
 
     /** 
+     * Create new instance of UpdateStatusTask.
+     * @param controller    Application controller
+     * @param api           Twitter API wrapper
+     * @param status        Your current status text
+     * @param inReplyTo     in reply to Id
+     */
+    public UpdateStatusTask(
+            IdenticaController controller,
+            IdenticaApi api,
+            String status,
+            String inReplyTo) {
+        this.controller = controller;
+        this.api = api;
+        this.status = status;
+        this.inReplyTo = inReplyTo;
+    }
+
+    /**
      * Create new instance of UpdateStatusTask.
      * @param controller    Application controller
      * @param api           Twitter API wrapper
@@ -53,7 +72,7 @@ public class UpdateStatusTask extends AbstractTask {
     /** Execute task that updates your Twitter status. */
     public void doTask() {
         try {
-            Status updatedStatus = api.updateStatus(status);
+            Status updatedStatus = api.updateStatus(status, inReplyTo);
             if(updatedStatus!=null) {
                 controller.addStatus(updatedStatus);
             }

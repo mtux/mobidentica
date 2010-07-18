@@ -188,7 +188,7 @@ public class TimelineCanvas extends Canvas {
         } else if(selectedIndex==2) {
             /** Reply to post */
             if(selectedStatus!=null) {
-                controller.showStatusView("@" + selectedStatus.getScreenName() + " ");
+                controller.showStatusView("@" + selectedStatus.getScreenName() + " ", selectedStatus.getId());
             }
         } else if(selectedIndex==3) {
             /** Send direct message */

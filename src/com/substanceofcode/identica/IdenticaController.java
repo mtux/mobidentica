@@ -276,12 +276,18 @@ public class IdenticaController {
         } else {
             timeline.setTimeline(responsesTimeline);
             display.setCurrent(timeline);
-        }        
+        }
     }
 
     /** Show status updating view. */
     public void showStatusView(String prefix) {
-        UpdateStatusTextBox statusView = new UpdateStatusTextBox(this, prefix);
+        UpdateStatusTextBox statusView = new UpdateStatusTextBox(this, prefix, "");
+        display.setCurrent(statusView);
+    }
+
+    /** Show status updating view. */
+    public void showStatusView(String prefix, String inReplyTo) {
+        UpdateStatusTextBox statusView = new UpdateStatusTextBox(this, prefix, inReplyTo);
         display.setCurrent(statusView);
     }
 
@@ -289,8 +295,8 @@ public class IdenticaController {
      * Update Twitter status.
      * @param status    New status
      */
-    public void updateStatus(String status) {
-        UpdateStatusTask task = new UpdateStatusTask( this, api, status );
+    public void updateStatus(String status, String inReplyTo) {
+        UpdateStatusTask task = new UpdateStatusTask( this, api, status, inReplyTo );
         WaitCanvas wait = new WaitCanvas(this, task);
         wait.setWaitText("Updating status...");
         display.setCurrent(wait);

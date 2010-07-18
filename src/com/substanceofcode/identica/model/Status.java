@@ -69,6 +69,10 @@ public class Status {
         return date;
     }
 
+    public String getId() {
+        return id;
+    }
+
     public int getHeight() {
         return height;
     }

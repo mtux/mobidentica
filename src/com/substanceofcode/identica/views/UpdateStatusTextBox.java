@@ -35,11 +35,12 @@ public class UpdateStatusTextBox extends TextBox implements CommandListener {
     private IdenticaController controller;
     private Command okCommand;
     private Command cancelCommand;
+    private String inReplyToId;
     
-    public UpdateStatusTextBox(IdenticaController controller, String prefix) {
+    public UpdateStatusTextBox(IdenticaController controller, String prefix, String inReplyTo) {
         super("Status", prefix, 140, TextField.ANY);
         this.controller = controller;
-        
+        inReplyToId = inReplyTo;
         okCommand = new Command("OK", Command.OK, 1);
         this.addCommand(okCommand);
         
@@ -56,7 +57,8 @@ public class UpdateStatusTextBox extends TextBox implements CommandListener {
      */
     public void commandAction(Command cmd, Displayable disp) {
         if(cmd==okCommand) {
-            controller.updateStatus(this.getString());
+            controller.updateStatus(this.getString(), inReplyToId);
+            inReplyToId = "";
         } else {
             controller.showRecentTimeline();
         }
