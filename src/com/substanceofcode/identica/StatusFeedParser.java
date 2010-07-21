@@ -21,6 +21,7 @@ package com.substanceofcode.identica;
 
 import com.substanceofcode.identica.model.Status;
 import com.substanceofcode.utils.CustomInputStream;
+//import com.substanceofcode.utils.Log;
 import com.substanceofcode.utils.ResultParser;
 import com.substanceofcode.utils.StringUtil;
 import com.substanceofcode.utils.XmlParser;
@@ -91,6 +92,7 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
                 
                 if (elementName.equals("status")) {
                     if(text.length()>0) {
+                                    //Log.add( screenName+ ": " + date.toString());
                         Status status = new Status(screenName, text, date, id );
                         statuses.addElement(status);
                     }
@@ -124,8 +126,10 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
                     doSender = false;
                     doRecipient = true;
                 } else if(elementName.equals("created_at")) {
-                    String dateString = xml.getText();
-                    date = parseDate( dateString );                    
+                    if(date == null){
+                        String dateString = xml.getText();
+                        date = parseDate( dateString );
+                    }
                 }
                     
             }
@@ -147,6 +151,7 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
     public static Date parseDate(String dateString) throws Exception {
         Date pubDate = null;
         try {
+            //Tue Jun 22 18:55:42 +0000 2010
             // Split date string to values
             // 0 = week day
             // 1 = day of month
@@ -173,13 +178,13 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
                 yearIndex = 2;
                 timeIndex = 3;
                 gmtIndex = 4;
-			} else if( columnCount==7 ) {
+            } else if( columnCount==7 ) {
                 // Expected format:
                 // Thu, 19 Jul  2007 00:00:00 N
                 yearIndex = 4;
                 timeIndex = 5;
                 gmtIndex = 6;
-            } else if( columnCount<5 || columnCount>6 ) {
+            } else if( columnCount < 5 || columnCount > 7 ) {
                 throw new Exception("Invalid date format: " + dateString);
             }
             
@@ -211,7 +216,9 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
             int seconds = Integer.parseInt( timeValues[2] );
                         
             pubDate = getCal(dayOfMonth, month, year, hours, minutes, seconds);
-            
+
+        //Log.add(dateString);
+        //Log.add(String(dayOfMonth) + String(month) + String(year) + String(hours) + String(minutes) + String(seconds));
         } catch(Exception ex) {
             // TODO: Add exception handling code
             throw new Exception("Error in parseDate: " + ex.getMessage());
@@ -219,6 +226,7 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
             // TODO: Add exception handling code
             throw new Exception("Throwable in parseDate: " + t.getMessage());
         }
+        //Log.add("__parseDate__: "+pubDate.toString()+" DateString was: "+dateString);
         return pubDate;
     }    
     

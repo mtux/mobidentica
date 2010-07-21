@@ -37,7 +37,7 @@ public class IdenticaApi {
     private String password;
     private String serviceUrl;
     private static final String PUBLIC_TIMELINE_URL = "/api/statuses/public_timeline.xml";
-    private static final String FRIENDS_TIMELINE_URL = "/api/statuses/friends_timeline.xml";
+    private static final String FRIENDS_TIMELINE_URL = "/api/statuses/home_timeline.xml";
     private static final String USER_TIMELINE_URL = "/api/statuses/user_timeline.xml";
     private static final String RESPONSES_TIMELINE_URL = "/api/statuses/replies.xml";
     private static final String STATUS_UPDATE_URL = "/api/statuses/update.xml";
