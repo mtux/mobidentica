@@ -38,10 +38,11 @@ public class AboutCanvas extends Canvas {
     public AboutCanvas( IdenticaController controller ) {
         this.setFullScreenMode(true);
         this.controller = controller;
-        texts = new String[3];
-        texts[0] = "Mobidentica v1.2";
+        texts = new String[4];
+        texts[0] = "Mobidentica v1.3";
         texts[1] = "Copyright 2009 Tommi Laukkanen (www.substanceofcode.com)";
-        texts[2] = HttpTransferStatus.getTotalBytesTransfered() + 
+        texts[2] = "Copyright 2010 Mehrdad Momeny (momeny.wordpress.com)";
+        texts[3] = HttpTransferStatus.getTotalBytesTransfered() +
                    " bytes transferred since startup.";
         balloon = new TalkBalloon(this.getWidth(), this.getHeight());        
     }
@@ -60,6 +61,7 @@ public class AboutCanvas extends Canvas {
         height += balloon.draw(g, texts[0], "Mobidentica", 5 + height);
         height += balloon.draw(g, texts[1], "Mobidentica", 5 + height);
         height += balloon.draw(g, texts[2], "Mobidentica", 5 + height);
+        height += balloon.draw(g, texts[3], "Mobidentica", 5 + height);
     }
         
     public void keyPressed(int keyCode) {
