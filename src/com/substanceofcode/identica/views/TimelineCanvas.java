@@ -54,7 +54,7 @@ public class TimelineCanvas extends Canvas {
         menuBar = new TabBar(2, labels, getWidth());
         
         /** Menu */
-        String[] menuLabels = {"Update status", "Reload items", "People", "Settings", "About", "Exit", "Cancel"};
+        String[] menuLabels = {"Update status", "Reload items", "Settings", "About", "Exit", "Cancel"};
         menu = new Menu(menuLabels, getWidth(), getHeight());
 
         /** Status menu */
@@ -154,14 +154,12 @@ public class TimelineCanvas extends Canvas {
             controller.clearTimelines();
             handleTabChange();
         } else if(selectedIndex==2) {
-            controller.showFriends();
-        } else if(selectedIndex==3) {
             controller.showLoginForm();
-        } else if(selectedIndex==4) {
+        } else if(selectedIndex==3) {
             controller.about();
-        } else if(selectedIndex==5) {
+        } else if(selectedIndex==4) {
             controller.exit();
-        } else if(selectedIndex==6) {
+        } else if(selectedIndex==5) {
             /** Cancel = Do nothing */
         }
     }
