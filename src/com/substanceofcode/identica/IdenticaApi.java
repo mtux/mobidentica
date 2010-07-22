@@ -116,6 +116,21 @@ public class IdenticaApi {
         return null;
     }
 
+    public Status setAsFavorite(String statusId)
+    {
+        try {
+            StatusFeedParser parser = new StatusFeedParser();
+            String url = serviceUrl + "/api/favorites/create/" + statusId + ".xml";
+            HttpUtil.doPost(url, parser);
+            Vector statuses = parser.getStatuses();
+            if(statuses!=null && statuses.isEmpty()==false) {
+                return (Status)statuses.elementAt(0);
+            }
+        } catch(Exception ex) {
+            Log.error("Error while updating status: " + ex.getMessage());
+        }
+        return null;
+    }
     /**
      * Request friends from identi.ca API.
      * @return Vector containing friends.

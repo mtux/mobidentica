@@ -24,6 +24,7 @@ import com.substanceofcode.identica.model.User;
 import com.substanceofcode.identica.tasks.RequestFriendsTask;
 import com.substanceofcode.identica.tasks.RequestTimelineTask;
 import com.substanceofcode.identica.tasks.UpdateStatusTask;
+import com.substanceofcode.identica.tasks.SetAsFavoriteTask;
 import com.substanceofcode.identica.views.AboutCanvas;
 import com.substanceofcode.identica.views.LoginForm;
 import com.substanceofcode.identica.views.SplashCanvas;
@@ -302,6 +303,14 @@ public class IdenticaController {
         display.setCurrent(wait);
     }
     
+    public void setAsFavorite(String statusId)
+    {
+        SetAsFavoriteTask task = new SetAsFavoriteTask(this, api, statusId);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        wait.setWaitText("Setting status as favorite...");
+        display.setCurrent(wait);
+    }
+
     public void useArchiveTimeline() {
         timeline.setTimeline(archiveTimeline);
     }
