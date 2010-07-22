@@ -22,6 +22,7 @@ package com.substanceofcode.identica;
 import com.substanceofcode.identica.model.Status;
 import com.substanceofcode.identica.model.User;
 import com.substanceofcode.identica.tasks.RemoveStatusTask;
+import com.substanceofcode.identica.tasks.RepeatStatusTask;
 import com.substanceofcode.identica.tasks.RequestFriendsTask;
 import com.substanceofcode.identica.tasks.RequestTimelineTask;
 import com.substanceofcode.identica.tasks.UpdateStatusTask;
@@ -324,7 +325,7 @@ public class IdenticaController {
     }
 
     public void repeat(String statusId) {
-        RepeatTask task = new RepeatTask(this, api, statusId);
+        RepeatStatusTask task = new RepeatStatusTask(this, api, statusId);
         WaitCanvas wait = new WaitCanvas(this, task);
         wait.setWaitText("Repeating the status...");
         display.setCurrent(wait);
