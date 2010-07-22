@@ -21,6 +21,7 @@ package com.substanceofcode.identica.views;
 
 import com.substanceofcode.infrastructure.Device;
 import com.substanceofcode.identica.IdenticaController;
+import com.substanceofcode.identica.Settings;
 import com.substanceofcode.identica.model.Status;
 import java.util.Vector;
 import javax.microedition.lcdui.Canvas;
@@ -201,7 +202,7 @@ public class TimelineCanvas extends Canvas {
             }
         } else if(selectedIndex==5) {
             /** Set selectedStatus as favorite */
-            if(selectedStatus!=null) {
+            if(selectedStatus!=null && selectedStatus.getScreenName().equals(controller.getSettings().getStringProperty(Settings.USERNAME, ""))) {
                 controller.removeFromServer(selectedStatus);
             }
         } else if(selectedIndex==6) {
