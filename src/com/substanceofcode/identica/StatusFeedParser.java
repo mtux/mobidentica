@@ -114,8 +114,8 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
                 } else if (elementName.equals("id") && id.equals("")) {
                     id = xml.getText();
                 } else if (elementName.equals("text")) {
-                    text += xml.getText();
-                } else if(elementName.equals("screen_name")) {
+                    text = xml.getText();
+                } else if(elementName.equals("screen_name") && screenName.equals("")) {
                     if(doSender || (!doSender && !doRecipient)) {
                         screenName = xml.getText();
                     }
@@ -125,11 +125,9 @@ http://assets2.twitter.com/system/user/profile_image/13348/normal/861009_f126471
                 } else if(elementName.equals("recipient")) {
                     doSender = false;
                     doRecipient = true;
-                } else if(elementName.equals("created_at")) {
-                    if(date == null){
+                } else if(elementName.equals("created_at") && date == null) {
                         String dateString = xml.getText();
                         date = parseDate( dateString );
-                    }
                 }
                     
             }
