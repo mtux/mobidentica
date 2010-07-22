@@ -21,6 +21,7 @@ package com.substanceofcode.identica;
 
 import com.substanceofcode.identica.model.Status;
 import com.substanceofcode.identica.model.User;
+import com.substanceofcode.identica.tasks.RemoveStatusTask;
 import com.substanceofcode.identica.tasks.RequestFriendsTask;
 import com.substanceofcode.identica.tasks.RequestTimelineTask;
 import com.substanceofcode.identica.tasks.UpdateStatusTask;
@@ -114,6 +115,17 @@ public class IdenticaController {
         if(archiveTimeline!=null) {
             archiveTimeline.insertElementAt(status, 0);
         }
+    }
+
+    public boolean removeStatus(Status status) {
+
+        if(recentTimeline!=null) {
+            return recentTimeline.removeElement(status);
+        }
+        if(archiveTimeline!=null) {
+            return archiveTimeline.removeElement(status);
+        }
+        return false;
     }
 
     public void clearTimelines() {
@@ -315,6 +327,13 @@ public class IdenticaController {
         RepeatTask task = new RepeatTask(this, api, statusId);
         WaitCanvas wait = new WaitCanvas(this, task);
         wait.setWaitText("Repeating the status...");
+        display.setCurrent(wait);
+    }
+
+    public void removeFromServer(Status status) {
+        RemoveStatusTask task = new RemoveStatusTask(this, api, status);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        wait.setWaitText("Deleting the status...");
         display.setCurrent(wait);
     }
 

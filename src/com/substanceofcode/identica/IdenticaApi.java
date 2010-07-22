@@ -126,7 +126,7 @@ public class IdenticaApi {
                 return (Status)statuses.elementAt(0);
             }
         } catch(Exception ex) {
-            Log.error("Error while updating status: " + ex.getMessage());
+            Log.error("Error while setting status as favorite: " + ex.getMessage());
         }
         return null;
     }
@@ -141,7 +141,23 @@ public class IdenticaApi {
                 return (Status)statuses.elementAt(0);
             }
         } catch(Exception ex) {
-            Log.error("Error while updating status: " + ex.getMessage());
+            Log.error("Error while repeating status: " + ex.getMessage());
+        }
+        return null;
+    }
+
+    public Status removeFromServer(String statusId) {
+        try {
+            StatusFeedParser parser = new StatusFeedParser();
+            String url = serviceUrl + "/api/statuses/destroy/" + statusId + ".xml";
+            //TODO: detect direct messages and destroy them through this: "/api/direct_messages/destroy/"
+            HttpUtil.doPost(url, parser);
+            Vector statuses = parser.getStatuses();
+            if(statuses!=null && statuses.isEmpty()==false) {
+                return (Status)statuses.elementAt(0);
+            }
+        } catch(Exception ex) {
+            Log.error("Error while removeing status: " + ex.getMessage());
         }
         return null;
     }

@@ -58,7 +58,8 @@ public class TimelineCanvas extends Canvas {
         menu = new Menu(menuLabels, getWidth(), getHeight());
 
         /** Status menu */
-        String[] statusMenuLabels = {"Open in browser", "Open link in browser", "Reply", "Repeat status", "Set as favorite", "Send direct message", "Cancel"};
+        String[] statusMenuLabels = {"Open in browser", "Open link in browser", "Reply", "Repeat this notice",
+                                     "Favor this notice", "Delete", "Send direct message", "Cancel"};
         statusMenu = new Menu(statusMenuLabels, getWidth(), getHeight());
 
         /** Status list control */
@@ -199,11 +200,16 @@ public class TimelineCanvas extends Canvas {
                 controller.setAsFavorite(selectedStatus.getId());
             }
         } else if(selectedIndex==5) {
+            /** Set selectedStatus as favorite */
+            if(selectedStatus!=null) {
+                controller.removeFromServer(selectedStatus);
+            }
+        } else if(selectedIndex==6) {
             /** Send direct message */
             if(selectedStatus!=null) {
                 controller.showStatusView("d " + selectedStatus.getScreenName() + " ");
             }
-        }else if(selectedIndex==6) {
+        }else if(selectedIndex==7) {
             /** Cancel = Do nothing */
         }
     }
