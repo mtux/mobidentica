@@ -104,7 +104,7 @@ public class IdenticaApi {
                     "?status=" + URLUTF8Encoder.encode(status);
             if( !inReplyTo.equals("") )
                 url += "&in_reply_to_status_id=" + inReplyTo;
-            url += "&source=Mobidentica";
+            url += "&source=Opidentica";
             HttpUtil.doPost( url, parser );
             Vector statuses = parser.getStatuses();
             if(statuses!=null && statuses.isEmpty()==false && status.startsWith("d ")==false) {

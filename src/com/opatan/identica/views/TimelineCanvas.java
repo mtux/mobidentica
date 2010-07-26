@@ -134,7 +134,7 @@ public class TimelineCanvas extends Canvas {
                 verticalScroll += getHeight()/6;
                 if(verticalScroll>0) {
                     verticalScroll = 0;
-                }            
+                }
             }
         } else if(gameAction == Canvas.DOWN) {
             menuBar.resetSelectedTab();

@@ -88,7 +88,7 @@ public class WaitCanvas extends Canvas implements Runnable {
         // int titleX = width/2;
         int titleY = height/4;
 
-        talkBalloon.draw(g, waitText, "Mobidentica", titleY);
+        talkBalloon.draw(g, waitText, "Opidentica", titleY);
         
         //g.setColor(0x000000);
         //g.setFont(statusFont);
@@ -103,7 +103,7 @@ public class WaitCanvas extends Canvas implements Runnable {
         g.fillRect( 0, 0, getWidth(), titleFont.getHeight()+2);
         g.setFont( titleFont );
         g.setColor( 0x000000 );
-        g.drawString("mobidentica",getWidth()/2,titleFont.getHeight(),Graphics.HCENTER|Graphics.BOTTOM);
+        g.drawString("Opidentica",getWidth()/2,titleFont.getHeight(),Graphics.HCENTER|Graphics.BOTTOM);
     }
 
     protected void keyPressed(int keyCode) {

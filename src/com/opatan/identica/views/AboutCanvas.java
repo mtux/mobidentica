@@ -38,11 +38,12 @@ public class AboutCanvas extends Canvas {
     public AboutCanvas( IdenticaController controller ) {
         this.setFullScreenMode(true);
         this.controller = controller;
-        texts = new String[4];
-        texts[0] = "Mobidentica v1.3";
-        texts[1] = "Copyright 2009 Tommi Laukkanen (www.substanceofcode.com)";
-        texts[2] = "Copyright 2010 Mehrdad Momeny (momeny.wordpress.com)";
-        texts[3] = HttpTransferStatus.getTotalBytesTransfered() +
+        texts = new String[5];
+        texts[0] = "Opidentica v1.3";
+        texts[1] = "Copyright 2010 Mehrdad Momeny (momeny.wordpress.com)";
+        texts[2] = "Opidentica is a fork of Mobidentica [By Tommi Laukkanen (www.substanceofcode.com)]";
+        texts[3] = "Opidentica is sponsored by Opatan.ir";
+        texts[4] = HttpTransferStatus.getTotalBytesTransfered() +
                    " bytes transferred since startup.";
         balloon = new TalkBalloon(this.getWidth(), this.getHeight());        
     }
@@ -58,10 +59,11 @@ public class AboutCanvas extends Canvas {
         
         /** Draw about text */
         int height = 0;
-        height += balloon.draw(g, texts[0], "Mobidentica", 5 + height);
-        height += balloon.draw(g, texts[1], "Mobidentica", 5 + height);
-        height += balloon.draw(g, texts[2], "Mobidentica", 5 + height);
-        height += balloon.draw(g, texts[3], "Mobidentica", 5 + height);
+        height += balloon.draw(g, texts[0], "Opidentica", 5 + height);
+        height += balloon.draw(g, texts[1], "Opidentica", 5 + height);
+        height += balloon.draw(g, texts[2], "Opidentica", 5 + height);
+        height += balloon.draw(g, texts[3], "Opidentica", 5 + height);
+        height += balloon.draw(g, texts[4], "Opidentica", 5 + height);
     }
         
     public void keyPressed(int keyCode) {

@@ -32,9 +32,9 @@ public class TalkBalloon {
     public static final Font textFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
     public int screenWidth;
     public int screenHeight;
-    private static final int BG_COLOR = 0xFFFFFF;
-    private static final int SELECTED_BG_COLOR = 0xDDDDDD;
-    private static final int BORDER_COLOR = 0xAAAAAA;
+    private static final int BG_COLOR = 0x000000;
+    private static final int SELECTED_BG_COLOR = 0x494949;
+    private static final int BORDER_COLOR = 0x949494;
     private int fontHeight;
     private int textWidth;
     
@@ -74,7 +74,7 @@ public class TalkBalloon {
         g.fillRect(x, y, textWidth + fontHeight, textHeight);
 
         if(isSelected) {
-            g.setColor(0x0000CC);
+            g.setColor(0x28bfd0);
             g.drawRect(x-0, y-0, textWidth + fontHeight + 0, textHeight + 0);
             g.drawRect(x-1, y-1, textWidth + fontHeight + 2, textHeight + 2);
             /*int size = (fontHeight)/2;
@@ -104,7 +104,7 @@ public class TalkBalloon {
         g.drawLine(x+triSize * 2, y + textHeight + triSize, x+triSize * 3, y + textHeight);
 
         // Draw text inside balloon
-        g.setColor(0x000000);
+        g.setColor(0xFFFFFF);
         g.setFont(textFont);
         int textRow = y + fontHeight + fontHeight/2;
         for(int line=0; line<textLines.length; line++) {
@@ -113,7 +113,7 @@ public class TalkBalloon {
         }
 
         // Draw talker text
-        g.setColor(0x0000aa);
+        g.setColor(0xd7402f);//28bfd0
         g.drawString(talkerText, x+triSize * 4 + 2, textRow + fontHeight/2 + 2, Graphics.LEFT|Graphics.BOTTOM);
 
         return (int)((textLines.length)*fontHeight + fontHeight*2 + 1);

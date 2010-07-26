@@ -37,10 +37,10 @@ public class TabBar {
     
     private static final int COLOR_BACKGROUND = 0x444444;
     private static final int COLOR_INACTIVE = 0xaaaaaa;
-    private static final int COLOR_ACTIVE = 0xffffff; //Theme.TWITTER_BLUE_COLOR;
+    private static final int COLOR_ACTIVE = 0x494949; //Theme.TWITTER_BLUE_COLOR;
     private static final int COLOR_SELECTED = 0xdddddd; //Theme.TWITTER_BLUE_COLOR;
-    private static final int COLOR_TEXT = 0x000000;
-    private static final int COLOR_INACTIVE_TEXT = 0x444444;
+    private static final int COLOR_TEXT = 0xffffff;
+    private static final int COLOR_INACTIVE_TEXT = 0xffffff;
     
     private static final Font labelFont = Font.getFont(
             Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL);
