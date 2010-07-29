@@ -63,10 +63,10 @@ public class SplashCanvas extends Canvas implements Runnable {
         Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL );
         g.setFont( font );
         int fontHeight = font.getHeight();
-        String copyright = "© 2009 Tommi Laukkanen";
+        String copyright = "© 2010 Mehrdad Momeny";
         int copyWidth = font.stringWidth(copyright);
         g.drawString(copyright, getWidth()/2 - copyWidth/2, getHeight()-fontHeight*2, Graphics.LEFT|Graphics.BOTTOM);
-        String urlLink = "© 2010 Mehrdad Momeny";
+        String urlLink = "http://opatan.ir/opidentica/";
         int urlWidth = font.stringWidth(urlLink);
         g.drawString(urlLink, getWidth()/2 - urlWidth/2, getHeight()-fontHeight, Graphics.LEFT|Graphics.BOTTOM);
     }

@@ -41,7 +41,7 @@ public class AboutCanvas extends Canvas {
         texts = new String[5];
         texts[0] = "Opidentica v1.3";
         texts[1] = "Copyright 2010 Mehrdad Momeny (momeny.wordpress.com)";
-        texts[2] = "Opidentica is a fork of Mobidentica [By Tommi Laukkanen (www.substanceofcode.com)]";
+        texts[2] = "Opidentica is a fork of Mobidentica";
         texts[3] = "Opidentica is sponsored by Opatan.ir";
         texts[4] = HttpTransferStatus.getTotalBytesTransfered() +
                    " bytes transferred since startup.";
