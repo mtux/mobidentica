@@ -32,9 +32,9 @@ public class TalkBalloon {
     public static final Font textFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
     public int screenWidth;
     public int screenHeight;
-    private static final int BG_COLOR = 0x000000;
-    private static final int SELECTED_BG_COLOR = 0x494949;
-    private static final int BORDER_COLOR = 0x949494;
+    private static final int BG_COLOR = 0x696969;
+    private static final int SELECTED_BG_COLOR = 0x000000;
+    private static final int BORDER_COLOR = 0x000000;
     private int fontHeight;
     private int textWidth;
     
@@ -74,9 +74,9 @@ public class TalkBalloon {
         g.fillRect(x, y, textWidth + fontHeight, textHeight);
 
         if(isSelected) {
-            g.setColor(0x28bfd0);
-            g.drawRoundRect(x-0, y-0, textWidth + fontHeight + 0, textHeight + 0, 5, 5);
-            g.drawRoundRect(x-1, y-1, textWidth + fontHeight + 2, textHeight + 2, 5, 5);
+            g.setColor(0x27b3c6);
+            g.drawRoundRect(x-0, y-0, textWidth + fontHeight + 0, textHeight + 0, 10, 10);
+            g.drawRoundRect(x-1, y-1, textWidth + fontHeight + 2, textHeight + 2, 10, 10);
             /*int size = (fontHeight)/2;
             g.fillTriangle(
                 x-size, y + textHeight/2 - size/2,
