@@ -38,12 +38,11 @@ public class AboutCanvas extends Canvas {
     public AboutCanvas( IdenticaController controller ) {
         this.setFullScreenMode(true);
         this.controller = controller;
-        texts = new String[5];
-        texts[0] = "Opidentica v1.3";
-        texts[1] = "Copyright 2010 Mehrdad Momeny (momeny.wordpress.com)";
-        texts[2] = "Opidentica is a fork of Mobidentica";
-        texts[3] = "Opidentica is sponsored by Opatan.ir";
-        texts[4] = HttpTransferStatus.getTotalBytesTransfered() +
+        texts = new String[4];
+        texts[0] = "Opidentica v1.3 (http://opatan.ir/opidentica)";
+        texts[1] = "Copyright 2010 Mehrdad Momeny";
+        texts[2] = "Opidentica is a fork of Mobidentica and sponsored by Opatan";
+        texts[3] = HttpTransferStatus.getTotalBytesTransfered() +
                    " bytes transferred since startup.";
         balloon = new TalkBalloon(this.getWidth(), this.getHeight());        
     }
@@ -63,7 +62,7 @@ public class AboutCanvas extends Canvas {
         height += balloon.draw(g, texts[1], "Opidentica", 5 + height);
         height += balloon.draw(g, texts[2], "Opidentica", 5 + height);
         height += balloon.draw(g, texts[3], "Opidentica", 5 + height);
-        height += balloon.draw(g, texts[4], "Opidentica", 5 + height);
+//        height += balloon.draw(g, texts[4], "Opidentica", 5 + height);
     }
         
     public void keyPressed(int keyCode) {
