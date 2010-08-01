@@ -136,8 +136,8 @@ public class Settings {
 					while (num-- > 0) {
 						String name = din.readUTF();
 						String value = din.readUTF();
-                                                Log.add("name: "+name);
-                                                Log.add("value: " + value);
+//                                                Log.add("name: "+name);
+//                                                Log.add("value: " + value);
 						properties.put(name, value);
 					}
 				}
@@ -176,8 +176,8 @@ public class Settings {
 			while (e.hasMoreElements()) {
 				String name = (String) e.nextElement();
 				String value = properties.get(name).toString();
-                                Log.add("name:: " + name);
-                                Log.add("value:: " + value);
+//                                Log.add("name:: " + name);
+//                                Log.add("value:: " + value);
 				dout.writeUTF(name);
 				dout.writeUTF(value);
 			}

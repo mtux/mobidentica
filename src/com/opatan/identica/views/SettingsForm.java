@@ -1,5 +1,5 @@
 /*
- * LoginForm.java
+ * SettingsForm.java
  *
  * Copyright (C) 2005-2009 Tommi Laukkanen
  * http://www.substanceofcode.com
@@ -32,11 +32,11 @@ import javax.microedition.lcdui.TextField;
 import javax.microedition.rms.RecordStoreException;
 
 /**
- * LoginForm for laconi.ca based services.
+ * SettingsForm for laconi.ca based services.
  *
  * @author Tommi Laukkanen (tlaukkanen at gmail dot com)
  */
-public class LoginForm extends Form implements CommandListener {
+public class SettingsForm extends Form implements CommandListener {
 
     private IdenticaController controller;
     private Command loginCommand;
@@ -48,11 +48,11 @@ public class LoginForm extends Form implements CommandListener {
     private TextField countField;
 
     /**
-     * Creates a new instance of LoginForm
+     * Creates a new instance of SettingsForm
      * @param controller    Application controller.
      */
-    public LoginForm(IdenticaController controller) {
-        super("Login");
+    public SettingsForm(IdenticaController controller) {
+        super("Settings");
         this.controller = controller;
 
         Settings settings = controller.getSettings();
@@ -73,7 +73,7 @@ public class LoginForm extends Form implements CommandListener {
         countField = new TextField("Max no of dents per list", count, 3, TextField.NUMERIC);
         append(countField);
 
-        loginCommand = new Command("Login", Command.ITEM, 1);
+        loginCommand = new Command("Save", Command.ITEM, 1);
         this.addCommand(loginCommand);
 
         backCommand = new Command("Back", Command.BACK, 2);
@@ -95,7 +95,7 @@ public class LoginForm extends Form implements CommandListener {
             String url = serviceUrlField.getString();
             Settings settings = controller.getSettings();
             /** Store username and password */
-            Log.add("LoginForm: "+ count);
+//            Log.add("LoginForm: "+ count);
             settings.setStringProperty(Settings.USERNAME, username);
             settings.setStringProperty(Settings.PASSWORD, password);
             settings.setStringProperty(Settings.SERVICE_URL, url);

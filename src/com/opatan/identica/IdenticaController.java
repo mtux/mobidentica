@@ -28,7 +28,7 @@ import com.opatan.identica.tasks.RequestTimelineTask;
 import com.opatan.identica.tasks.UpdateStatusTask;
 import com.opatan.identica.tasks.SetAsFavoriteTask;
 import com.opatan.identica.views.AboutCanvas;
-import com.opatan.identica.views.LoginForm;
+import com.opatan.identica.views.SettingsForm;
 import com.opatan.identica.views.SplashCanvas;
 import com.opatan.identica.views.TimelineCanvas;
 import com.opatan.identica.views.UpdateStatusTextBox;
@@ -369,7 +369,7 @@ public class IdenticaController {
     
     /** Show login form */
     public void showLoginForm() {
-        LoginForm loginForm = new LoginForm( this );
+        SettingsForm loginForm = new SettingsForm( this );
         display.setCurrent( loginForm );
     }
 
