@@ -19,6 +19,7 @@
 
 package com.opatan.identica;
 
+import com.opatan.utils.Log;
 import java.io.*;
 import java.util.*;
 import javax.microedition.midlet.*;
@@ -47,6 +48,7 @@ public class Settings {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String SERVICE_URL = "service";
+    public static final String NUM_OF_DENTS = "count";
 
 	/**
 	 * Singleton pattern is used to return 
@@ -134,6 +136,8 @@ public class Settings {
 					while (num-- > 0) {
 						String name = din.readUTF();
 						String value = din.readUTF();
+                                                Log.add("name: "+name);
+                                                Log.add("value: " + value);
 						properties.put(name, value);
 					}
 				}
@@ -172,6 +176,8 @@ public class Settings {
 			while (e.hasMoreElements()) {
 				String name = (String) e.nextElement();
 				String value = properties.get(name).toString();
+                                Log.add("name:: " + name);
+                                Log.add("value:: " + value);
 				dout.writeUTF(name);
 				dout.writeUTF(value);
 			}

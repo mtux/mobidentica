@@ -35,6 +35,7 @@ public class IdenticaApi {
 
     private String username;
     private String password;
+    private String count;
     private String serviceUrl;
     private static final String PUBLIC_TIMELINE_URL = "/api/statuses/public_timeline.xml";
     private static final String FRIENDS_TIMELINE_URL = "/api/statuses/home_timeline.xml";
@@ -54,6 +55,10 @@ public class IdenticaApi {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
     }
 
     /**
@@ -206,7 +211,8 @@ public class IdenticaApi {
         try {
             HttpUtil.setBasicAuthentication(username, password);
             StatusFeedParser parser = new StatusFeedParser();
-            HttpUtil.doGet(serviceUrl + timelineUrl, parser);
+            String url = serviceUrl + timelineUrl + "?count=" + count;
+            HttpUtil.doGet( url, parser);
             entries = parser.getStatuses();
         } catch (IOException ex) {
             ex.printStackTrace();

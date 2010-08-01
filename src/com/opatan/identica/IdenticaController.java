@@ -167,6 +167,7 @@ public class IdenticaController {
         api.setUsername(username);
         api.setPassword(password);
         api.setUrl(serviceUrl);
+        api.setCount(settings.getStringProperty(Settings.NUM_OF_DENTS, "20") );
         showRecentTimeline();
     }
 

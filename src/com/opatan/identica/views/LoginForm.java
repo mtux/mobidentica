@@ -23,7 +23,7 @@ import com.opatan.identica.Settings;
 import com.opatan.identica.IdenticaController;
 import com.opatan.utils.Log;
 import java.io.IOException;
-import javax.microedition.lcdui.ChoiceGroup;
+//import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
@@ -40,11 +40,12 @@ public class LoginForm extends Form implements CommandListener {
 
     private IdenticaController controller;
     private Command loginCommand;
-    private Command exitCommand;
+    private Command backCommand;
     private TextField usernameField;
     private TextField passwordField;
     private TextField serviceUrlField;
-    private ChoiceGroup rememberValuesChoice;
+//    private ChoiceGroup rememberValuesChoice;
+    private TextField countField;
 
     /**
      * Creates a new instance of LoginForm
@@ -68,15 +69,15 @@ public class LoginForm extends Form implements CommandListener {
         serviceUrlField = new TextField("Service URL", serviceUrl, 64, TextField.URL);
         append(serviceUrlField);
 
-        String[] labels = {"Save credentials"};
-        rememberValuesChoice = new ChoiceGroup("Options", ChoiceGroup.MULTIPLE, labels, null);
-        append(rememberValuesChoice);
+        String count = settings.getStringProperty(Settings.NUM_OF_DENTS, "20");
+        countField = new TextField("Max no of dents per list", count, 3, TextField.NUMERIC);
+        append(countField);
 
         loginCommand = new Command("Login", Command.ITEM, 1);
         this.addCommand(loginCommand);
 
-        exitCommand = new Command("Exit", Command.EXIT, 2);
-        this.addCommand(exitCommand);
+        backCommand = new Command("Back", Command.BACK, 2);
+        this.addCommand(backCommand);
 
         this.setCommandListener(this);
     }
@@ -90,20 +91,15 @@ public class LoginForm extends Form implements CommandListener {
         if (cmd == loginCommand) {
             String username = usernameField.getString();
             String password = passwordField.getString();
+            String count = countField.getString();
             String url = serviceUrlField.getString();
             Settings settings = controller.getSettings();
-            if (rememberValuesChoice.isSelected(0)) {
-                /** Store username and password */
-                Log.debug("Remember");
-                settings.setStringProperty(Settings.USERNAME, username);
-                settings.setStringProperty(Settings.PASSWORD, password);
-                settings.setStringProperty(Settings.SERVICE_URL, url);
-            } else {
-                /** Clear username and password */
-                Log.debug("Clear");
-                settings.setStringProperty(Settings.USERNAME, "");
-                settings.setStringProperty(Settings.PASSWORD, "");
-            }
+            /** Store username and password */
+            Log.add("LoginForm: "+ count);
+            settings.setStringProperty(Settings.USERNAME, username);
+            settings.setStringProperty(Settings.PASSWORD, password);
+            settings.setStringProperty(Settings.SERVICE_URL, url);
+            settings.setStringProperty(Settings.NUM_OF_DENTS, count);
             try {
                 settings.save(true);
             } catch (IOException ex) {
@@ -113,8 +109,8 @@ public class LoginForm extends Form implements CommandListener {
             }
             controller.setServiceUrl(url);
             controller.login(username, password, url);
-        } else if (cmd == exitCommand) {
-            controller.exit();
+        } else if (cmd == backCommand) {
+            controller.showRecentTimeline();
         }
     }
 }
