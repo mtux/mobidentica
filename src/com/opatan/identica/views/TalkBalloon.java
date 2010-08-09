@@ -74,7 +74,7 @@ public class TalkBalloon {
         g.fillRect(x, y, textWidth + fontHeight, textHeight);
 
         if(isSelected) {
-            g.setColor(0x27b3c6);
+            g.setColor(0xd7402f);//0x27b3c6
             g.drawRoundRect(x-0, y-0, textWidth + fontHeight + 0, textHeight + 0, 10, 10);
             g.drawRoundRect(x-1, y-1, textWidth + fontHeight + 2, textHeight + 2, 10, 10);
             /*int size = (fontHeight)/2;

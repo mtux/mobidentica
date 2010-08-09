@@ -143,7 +143,8 @@ public class TimelineCanvas extends Canvas {
             } else if(statusMenu.isActive()) {
                 statusMenu.selectNext();
             } else {
-                verticalScroll -= getHeight()/6; 
+                if(statusList.getSelected() != null)
+                    verticalScroll -= getHeight()/6;
             }
         }        
     }
