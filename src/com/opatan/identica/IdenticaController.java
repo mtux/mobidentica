@@ -90,6 +90,13 @@ public class IdenticaController {
      * @param midlet Application midlet.
      */
     private IdenticaController(IdenticaMidlet midlet) {
+
+        publicTimeline = new Vector();
+        recentTimeline = new Vector();
+        archiveTimeline = new Vector();
+        responsesTimeline = new Vector();
+        directTimeline = new Vector();
+        friendsStatuses = new Vector();
         try {
             this.midlet = midlet;
             this.display = Display.getDisplay(midlet);

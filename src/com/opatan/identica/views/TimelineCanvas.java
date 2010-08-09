@@ -154,7 +154,7 @@ public class TimelineCanvas extends Canvas {
         if(selectedIndex==0) {
             controller.showStatusView("");
         } else if(selectedIndex==1) {
-            controller.clearTimelines();
+            controller.clearTimelines();//TODO remove this line to do not reload all timelines
             handleTabChange();
         } else if(selectedIndex==2) {
             controller.showLoginForm();
