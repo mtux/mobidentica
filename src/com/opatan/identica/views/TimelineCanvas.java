@@ -92,28 +92,58 @@ public class TimelineCanvas extends Canvas {
     }
 
     private void handleTabChange() {
+
+        menuBar.activateSelectedTab();
+
         verticalScroll = 0;
         int tabIndex = menuBar.getSelectedTabIndex();
-        if(tabIndex==0) {
-            /** Archive selected */
-            controller.showArchiveTimeline();
-        } else if(tabIndex==1) {
-            /** Responses selected */
-            controller.showResponsesTimeline();
-        } else if(tabIndex==2) {
-            /** Recent selected */
-            controller.showRecentTimeline();
-        } else if(tabIndex==3) {
-            /** Direct messages */
-            controller.showDirectMessages();
-        } else if(tabIndex==4) {
-            /** Friends */
-            controller.showFriends();
-        } else if(tabIndex==5) {
-            /** Public selected */
-            controller.showPublicTimeline();
+        switch(tabIndex){
+            case 0:
+                controller.showArchiveTimeline();
+                break;
+            case 1:
+                controller.showResponsesTimeline();
+                break;
+            case 2:
+                controller.showRecentTimeline();
+                break;
+            case 3:
+                controller.showDirectMessages();
+                break;
+            case 4:
+                controller.showFriends();
+                break;
+            case 5:
+                controller.showPublicTimeline();
+                break;
         }
+        repaint();
 
+    }
+
+    private void updateCurrentTimeline() {
+        verticalScroll = 0;
+        int tabIndex = menuBar.getSelectedTabIndex();
+        switch(tabIndex){
+            case 0:
+                controller.updateArchiveTimeline();
+                break;
+            case 1:
+                controller.updateResponsesTimeline();
+                break;
+            case 2:
+                controller.updateRecentTimeline();
+                break;
+            case 3:
+                controller.updateDirectMessages();
+                break;
+            case 4:
+                controller.updateFriends();
+                break;
+            case 5:
+                controller.updatePublicTimeline();
+                break;
+        }
     }
     
     /** Handle repeated key presses. */
@@ -154,8 +184,7 @@ public class TimelineCanvas extends Canvas {
         if(selectedIndex==0) {
             controller.showStatusView("");
         } else if(selectedIndex==1) {
-            controller.clearTimelines();//TODO remove this line to do not reload all timelines
-            handleTabChange();
+            updateCurrentTimeline();
         } else if(selectedIndex==2) {
             controller.showLoginForm();
         } else if(selectedIndex==3) {
@@ -221,23 +250,16 @@ public class TimelineCanvas extends Canvas {
         String keyName = this.getKeyName(keyCode);
         if(gameAction == Canvas.LEFT) {
             menuBar.selectPreviousTab();
-            //handleTabChange();
+            handleTabChange();
             repaint();
             return;
         } else if(gameAction == Canvas.RIGHT) {
             menuBar.selectNextTab();
-            //handleTabChange();
+            handleTabChange();
             repaint();
             return;
         } else if(gameAction == Canvas.FIRE) {
             
-            if(menuBar.isSelectedActive()==false) {
-                menuBar.activateSelectedTab();
-                handleTabChange();
-                repaint();
-                return;
-            }
-
             if(menu.isActive()) {
                 menu.deactivate();
                 activateMenuItem();

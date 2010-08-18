@@ -206,18 +206,6 @@ public class IdenticaController {
         this.friendsStatuses = friendStatuses;
     }
 
-    public void showDirectMessages() {
-        if(directTimeline==null) {
-            RequestTimelineTask task = new RequestTimelineTask(
-                this, api, RequestTimelineTask.FEED_DIRECT);
-            WaitCanvas wait = new WaitCanvas(this, task);
-            display.setCurrent(wait);
-        } else {
-            timeline.setTimeline(directTimeline);
-            display.setCurrent(timeline);
-        }
-    }
-
     public void showError(String string) {
         Alert alert = new Alert("Error");
         alert.setString(string);
@@ -228,14 +216,18 @@ public class IdenticaController {
     /** Show friends */
     public void showFriends() {
         if(friendsStatuses==null) {
-            RequestFriendsTask task = new RequestFriendsTask(this, api);
-            WaitCanvas wait = new WaitCanvas(this, task);
-            wait.setWaitText("Loading friends");
-            display.setCurrent(wait);
+            updateFriends();
         } else {
             timeline.setTimeline(friendsStatuses);
             display.setCurrent(timeline);
         }
+    }
+
+    public void updateFriends() {
+        RequestFriendsTask task = new RequestFriendsTask(this, api);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        wait.setWaitText("Loading friends");
+        display.setCurrent(wait);
     }
 
     /** Show friends */
@@ -278,28 +270,87 @@ public class IdenticaController {
 
     public void showPublicTimeline() {
         if(publicTimeline==null) {
-            RequestTimelineTask task = new RequestTimelineTask(
-                this, api, RequestTimelineTask.FEED_PUBLIC);
-            WaitCanvas wait = new WaitCanvas(this, task);
-            display.setCurrent(wait);
+            updatePublicTimeline();
         } else {
             timeline.setTimeline(publicTimeline);
             display.setCurrent(timeline);
         }
     }
 
+    public void updatePublicTimeline() {
+        RequestTimelineTask task = new RequestTimelineTask(
+            this, api, RequestTimelineTask.FEED_PUBLIC);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        display.setCurrent(wait);
+    }
+
     public void showResponsesTimeline() {
         if(responsesTimeline==null) {
-            RequestTimelineTask task = new RequestTimelineTask(
-                this, api, RequestTimelineTask.FEED_RESPONSES);
-            WaitCanvas wait = new WaitCanvas(this, task);
-            wait.setWaitText("Loading responses...");
-            display.setCurrent(wait);
+            updateResponsesTimeline();
         } else {
             timeline.setTimeline(responsesTimeline);
             display.setCurrent(timeline);
         }
     }
+
+    public void updateResponsesTimeline() {
+        RequestTimelineTask task = new RequestTimelineTask(
+            this, api, RequestTimelineTask.FEED_RESPONSES);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        wait.setWaitText("Loading responses...");
+        display.setCurrent(wait);
+    }
+
+    public void showDirectMessages() {
+        if(directTimeline==null) {
+            updateDirectMessages();
+        } else {
+            timeline.setTimeline(directTimeline);
+            display.setCurrent(timeline);
+        }
+    }
+
+    public void updateDirectMessages() {
+        RequestTimelineTask task = new RequestTimelineTask(
+            this, api, RequestTimelineTask.FEED_DIRECT);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        display.setCurrent(wait);
+    }
+
+    public void showArchiveTimeline() {
+        if(archiveTimeline==null) {
+            updateArchiveTimeline();
+        } else {
+            timeline.setTimeline(archiveTimeline);
+            display.setCurrent(timeline);
+        }
+    }
+
+    public void updateArchiveTimeline() {
+        RequestTimelineTask task = new RequestTimelineTask(
+            this, api, RequestTimelineTask.FEED_ARCHIVE);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        wait.setWaitText("Loading...");
+        display.setCurrent(wait);
+    }
+
+    public void showRecentTimeline() {
+        if( recentTimeline==null) {
+            updateRecentTimeline();
+        } else {
+            timeline.setTimeline( recentTimeline );
+            display.setCurrent( timeline );
+        }
+    }
+
+    public void updateRecentTimeline() {
+        RequestTimelineTask task = new RequestTimelineTask(
+                this, api, RequestTimelineTask.FEED_FRIENDS);
+        WaitCanvas wait = new WaitCanvas(this, task);
+        wait.setWaitText("Loading your timeline...");
+        display.setCurrent(wait);
+    }
+
 
     /** Show status updating view. */
     public void showStatusView(String prefix) {
@@ -353,19 +404,6 @@ public class IdenticaController {
         timeline.setTimeline(responsesTimeline);
     }
     
-    public void showArchiveTimeline() {
-        if(archiveTimeline==null) {
-            RequestTimelineTask task = new RequestTimelineTask(
-                this, api, RequestTimelineTask.FEED_ARCHIVE);
-            WaitCanvas wait = new WaitCanvas(this, task);
-            wait.setWaitText("Loading...");
-            display.setCurrent(wait);
-        } else {
-            timeline.setTimeline(archiveTimeline);
-            display.setCurrent(timeline);
-        }
-    }
-
     /** 
      * Set friends time line entries.
      * @param friendsTimeline 
@@ -379,19 +417,6 @@ public class IdenticaController {
         SettingsForm loginForm = new SettingsForm( this );
         display.setCurrent( loginForm );
     }
-
-    public void showRecentTimeline() {
-        if( recentTimeline==null) {
-            RequestTimelineTask task = new RequestTimelineTask(
-                this, api, RequestTimelineTask.FEED_FRIENDS);
-            WaitCanvas wait = new WaitCanvas(this, task);
-            wait.setWaitText("Loading your timeline...");
-            display.setCurrent(wait);
-        } else {
-            timeline.setTimeline( recentTimeline );
-            display.setCurrent( timeline );
-        }
-    }    
     
     public void showTimeline(Vector timelineFeed ) {        
         timeline.setTimeline( timelineFeed );
