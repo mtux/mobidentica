@@ -46,7 +46,8 @@ public class RemoveStatusTask extends AbstractTask {
                 controller.removeStatus(status);
             }
         } finally {
-            controller.showRecentTimeline();
+            if(controller.getCurrentDisplay() == this.waitCanvas);
+                controller.showCurrentTimeline();
         }
     }
 

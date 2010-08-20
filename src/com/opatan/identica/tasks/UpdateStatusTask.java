@@ -23,6 +23,7 @@ import com.opatan.tasks.AbstractTask;
 import com.opatan.identica.IdenticaApi;
 import com.opatan.identica.IdenticaController;
 import com.opatan.identica.model.Status;
+import com.opatan.utils.Log;
 
 /**
  * Task to update Twitter status.
@@ -75,9 +76,13 @@ public class UpdateStatusTask extends AbstractTask {
             Status updatedStatus = api.updateStatus(status, inReplyTo);
             if(updatedStatus!=null) {
                 controller.addStatus(updatedStatus);
+                controller.showCurrentTimeline();
+            } else {
+                controller.showStatusView(status, inReplyTo);
             }
-        } finally {
-            controller.showRecentTimeline();
+        } catch (Exception ex) {
+            Log.add(ex.toString());
+
         }
     }
     

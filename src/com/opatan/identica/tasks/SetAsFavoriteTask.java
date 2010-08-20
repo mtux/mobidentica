@@ -50,7 +50,8 @@ public class SetAsFavoriteTask extends AbstractTask {
                 Log.error("Failed to create favorite");
             }
         } finally {
-            controller.showRecentTimeline();
+            if(controller.getCurrentDisplay() == this.waitCanvas);
+                controller.showCurrentTimeline();
         }
     }
 

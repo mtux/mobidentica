@@ -23,9 +23,12 @@ import com.opatan.infrastructure.Device;
 import com.opatan.identica.IdenticaController;
 import com.opatan.identica.Settings;
 import com.opatan.identica.model.Status;
+import com.opatan.utils.ImageUtil;
 import java.util.Vector;
 import javax.microedition.lcdui.Canvas;
+//import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 /**
  * TimelineCanvas
@@ -41,6 +44,8 @@ public class TimelineCanvas extends Canvas {
     private Menu menu;
     private Menu statusMenu;
     private int verticalScroll;
+    private Image logoImage;
+    private Graphics canvasGraphics;
     
     /** 
      * Creates a new instance of TimelineCanvas
@@ -67,6 +72,8 @@ public class TimelineCanvas extends Canvas {
         statusList = new StatusList(getWidth(), getHeight());        
         
         verticalScroll = 0;
+
+        logoImage = ImageUtil.loadImage("/images/logo.png");
     }
 
     public void setTimeline(Vector friendsTimeline) {
@@ -74,6 +81,7 @@ public class TimelineCanvas extends Canvas {
     }
 
     protected void paint(Graphics g) {
+        canvasGraphics = g;
         g.setColor(Theme.BACKGROUND_COLOR);
         g.fillRect(0, 0, getWidth(), getHeight());
 
@@ -89,6 +97,10 @@ public class TimelineCanvas extends Canvas {
         } else if(statusMenu.isActive()) {
             statusMenu.draw(g);
         }
+    }
+
+    public void showCurrentTimeline() {
+        handleTabChange();
     }
 
     private void handleTabChange() {
@@ -271,8 +283,7 @@ public class TimelineCanvas extends Canvas {
             }
                 
         } else if( keyName.indexOf("SOFT")>=0 && keyName.indexOf("1")>0 ||
-            (Device.isNokia() && keyCode==-6) ||
-            keyCode == TimelineCanvas.KEY_STAR) {
+            (Device.isNokia() && keyCode==-6) ) {
             /** Left soft key pressed */
             if(menu.isActive()) {
                 menu.deactivate();
@@ -281,8 +292,7 @@ public class TimelineCanvas extends Canvas {
                 menu.activate();
             }
         } else if( ((keyName.indexOf("SOFT")>=0 && keyName.indexOf("2")>0) ||
-            (Device.isNokia() && keyCode==-7) ||
-            keyCode == TimelineCanvas.KEY_POUND) ) {
+            (Device.isNokia() && keyCode==-7) ) ) {
             /** Right soft key pressed */
             if(menu.isActive()) {
                 menu.deactivate();
@@ -290,11 +300,32 @@ public class TimelineCanvas extends Canvas {
             } else {
                 menu.activate();
             }
+        } else if (keyCode == TimelineCanvas.KEY_POUND){
+            controller.showStatusView("");
+        } else if (keyCode == TimelineCanvas.KEY_STAR) {
+            updateCurrentTimeline();
         }
         handleUpAndDownKeys(keyCode);
         repaint();
     }
     
-    
+//    public void drawBackground() {
+//        Graphics g = canvasGraphics;
+////        g.setColor( Theme.BACKGROUND_COLOR );
+////        g.fillRect(0, 0, getWidth(), getHeight());
+//
+//        g.drawImage(logoImage, getWidth()/2, getHeight()/2, Graphics.HCENTER|Graphics.VCENTER);
+//
+//        g.setColor(0xBBBBBB);
+//        Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL );
+//        g.setFont( font );
+//        int fontHeight = font.getHeight();
+//        String copyright = "© 2010 Mehrdad Momeny";
+//        int copyWidth = font.stringWidth(copyright);
+//        g.drawString(copyright, getWidth()/2 - copyWidth/2, getHeight()-fontHeight*2, Graphics.LEFT|Graphics.BOTTOM);
+//        String urlLink = "http://opatan.ir/opidentica/";
+//        int urlWidth = font.stringWidth(urlLink);
+//        g.drawString(urlLink, getWidth()/2 - urlWidth/2, getHeight()-fontHeight, Graphics.LEFT|Graphics.BOTTOM);
+//    }
     
 }

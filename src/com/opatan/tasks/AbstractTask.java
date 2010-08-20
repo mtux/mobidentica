@@ -19,6 +19,8 @@
 
 package com.opatan.tasks;
 
+import com.opatan.identica.views.WaitCanvas;
+
 /**
  *
  * @author Tommi Laukkanen (tlaukkanen at gmail dot com)
@@ -26,6 +28,7 @@ package com.opatan.tasks;
 public abstract class AbstractTask implements Runnable {
     
     private Thread executionThread;
+    protected WaitCanvas waitCanvas;
 //    private boolean isAborted = false;
 
     public void execute() {
@@ -39,6 +42,9 @@ public abstract class AbstractTask implements Runnable {
     
     public abstract void doTask();
 
+    public void setWaitCanvas(WaitCanvas canvas) {
+        waitCanvas = canvas;
+    }
 //    public void abort() {
 //        isAborted = true;
 //    }

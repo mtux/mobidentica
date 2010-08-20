@@ -351,6 +351,9 @@ public class IdenticaController {
         display.setCurrent(wait);
     }
 
+    public void showCurrentTimeline() {
+        timeline.showCurrentTimeline();
+    }
 
     /** Show status updating view. */
     public void showStatusView(String prefix) {

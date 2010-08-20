@@ -48,7 +48,8 @@ public class RepeatStatusTask extends AbstractTask {
                 controller.addStatus(updatedStatus);
             }
         } finally {
-            controller.showRecentTimeline();
+            if(controller.getCurrentDisplay() == this.waitCanvas);
+                controller.showCurrentTimeline();
         }
     }
 
