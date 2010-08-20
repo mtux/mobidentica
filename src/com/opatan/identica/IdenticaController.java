@@ -175,7 +175,10 @@ public class IdenticaController {
         api.setPassword(password);
         api.setUrl(serviceUrl);
         api.setCount(settings.getStringProperty(Settings.NUM_OF_DENTS, "20") );
-        showRecentTimeline();
+        if(settings.getBooleanProperty(Settings.UPDATE_ON_START, false))
+            updateRecentTimeline();
+        else
+            showRecentTimeline();
     }
 
     public void setPublicTimeline(Vector publicTimeline) {

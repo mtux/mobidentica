@@ -24,6 +24,7 @@ import com.opatan.identica.IdenticaController;
 import com.opatan.utils.Log;
 import java.io.IOException;
 //import javax.microedition.lcdui.ChoiceGroup;
+import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
@@ -44,7 +45,7 @@ public class SettingsForm extends Form implements CommandListener {
     private TextField usernameField;
     private TextField passwordField;
     private TextField serviceUrlField;
-//    private ChoiceGroup rememberValuesChoice;
+    private ChoiceGroup loadOnStartChoice;
     private TextField countField;
 
     /**
@@ -68,6 +69,12 @@ public class SettingsForm extends Form implements CommandListener {
         String serviceUrl = settings.getStringProperty(Settings.SERVICE_URL, "http://identi.ca");
         serviceUrlField = new TextField("Service URL", serviceUrl, 64, TextField.URL);
         append(serviceUrlField);
+
+        String[] lables = {"Load Recent timeline on start"};
+        boolean loadOnStart = settings.getBooleanProperty(Settings.UPDATE_ON_START, false);
+        loadOnStartChoice = new ChoiceGroup("Options", ChoiceGroup.MULTIPLE, lables, null);
+        loadOnStartChoice.setSelectedIndex(0, loadOnStart);
+        append(loadOnStartChoice);
 
         String count = settings.getStringProperty(Settings.NUM_OF_DENTS, "20");
         countField = new TextField("Max no of dents per list", count, 3, TextField.NUMERIC);
@@ -93,6 +100,7 @@ public class SettingsForm extends Form implements CommandListener {
             String password = passwordField.getString();
             String count = countField.getString();
             String url = serviceUrlField.getString();
+            boolean loadOnStart = loadOnStartChoice.isSelected(0);
             Settings settings = controller.getSettings();
             /** Store username and password */
 //            Log.add("LoginForm: "+ count);
@@ -100,6 +108,7 @@ public class SettingsForm extends Form implements CommandListener {
             settings.setStringProperty(Settings.PASSWORD, password);
             settings.setStringProperty(Settings.SERVICE_URL, url);
             settings.setStringProperty(Settings.NUM_OF_DENTS, count);
+            settings.setBooleanProperty(Settings.UPDATE_ON_START, loadOnStart);
             try {
                 settings.save(true);
             } catch (IOException ex) {

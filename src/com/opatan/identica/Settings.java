@@ -49,6 +49,7 @@ public class Settings {
     public static final String PASSWORD = "password";
     public static final String SERVICE_URL = "service";
     public static final String NUM_OF_DENTS = "count";
+    public static final String UPDATE_ON_START = "update";
 
 	/**
 	 * Singleton pattern is used to return 
