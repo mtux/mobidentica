@@ -33,7 +33,7 @@ public class IdenticaMidlet extends MIDlet {
     public IdenticaMidlet() {
         try{
             controller = IdenticaController.getInstance(this);
-            controller.showSplash();            
+            controller.show();            
         }catch(Exception any){
             any.printStackTrace();
         }

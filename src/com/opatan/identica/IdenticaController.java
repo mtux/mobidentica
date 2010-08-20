@@ -427,9 +427,18 @@ public class IdenticaController {
     }
 
     /** Show splash screen */
-    void showSplash() {
-        SplashCanvas splash = new SplashCanvas(this);
-        display.setCurrent(splash);
+    void show() {
+//        Settings settings = getSettings();
+        String username = settings.getStringProperty(Settings.USERNAME, "");
+        String password = settings.getStringProperty(Settings.PASSWORD, "");
+        String serviceUrl = settings.getStringProperty(Settings.SERVICE_URL, "http://laconi.ca");
+        if(username.length()>0) {
+            login(username, password, serviceUrl);
+        } else {
+            showLoginForm();
+        }
+//        SplashCanvas splash = new SplashCanvas(this);
+//        display.setCurrent(splash);
     }
 
 }

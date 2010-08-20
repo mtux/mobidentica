@@ -27,6 +27,7 @@ import com.opatan.utils.ImageUtil;
 import java.util.Vector;
 import javax.microedition.lcdui.Canvas;
 //import javax.microedition.lcdui.Font;
+import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
@@ -86,11 +87,15 @@ public class TimelineCanvas extends Canvas {
         g.fillRect(0, 0, getWidth(), getHeight());
 
         if(menu.isActive()==false && statusMenu.isActive()==false) {
+            if(statuses.isEmpty()) {
+                drawBackground(g);
+            } else {
             boolean drawSelectionBox = menuBar.isSelectedActive();
             statusList.draw(
                     g, statuses,
                     menuBar.getHeight() + verticalScroll + TalkBalloon.textFont.getHeight()/2,
                     drawSelectionBox);
+            }
             menuBar.draw(g, 0);
         } else if(menu.isActive()) {
             menu.draw(g);
@@ -309,23 +314,18 @@ public class TimelineCanvas extends Canvas {
         repaint();
     }
     
-//    public void drawBackground() {
-//        Graphics g = canvasGraphics;
-////        g.setColor( Theme.BACKGROUND_COLOR );
-////        g.fillRect(0, 0, getWidth(), getHeight());
-//
-//        g.drawImage(logoImage, getWidth()/2, getHeight()/2, Graphics.HCENTER|Graphics.VCENTER);
-//
-//        g.setColor(0xBBBBBB);
-//        Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL );
-//        g.setFont( font );
-//        int fontHeight = font.getHeight();
-//        String copyright = "© 2010 Mehrdad Momeny";
-//        int copyWidth = font.stringWidth(copyright);
-//        g.drawString(copyright, getWidth()/2 - copyWidth/2, getHeight()-fontHeight*2, Graphics.LEFT|Graphics.BOTTOM);
-//        String urlLink = "http://opatan.ir/opidentica/";
-//        int urlWidth = font.stringWidth(urlLink);
-//        g.drawString(urlLink, getWidth()/2 - urlWidth/2, getHeight()-fontHeight, Graphics.LEFT|Graphics.BOTTOM);
-//    }
+    public void drawBackground(Graphics g) {
+        g.drawImage(logoImage, getWidth()/2, getHeight()/2, Graphics.HCENTER|Graphics.VCENTER);
+        g.setColor(0xBBBBBB);
+        Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL );
+        g.setFont( font );
+        int fontHeight = font.getHeight();
+        String copyright = "© 2010 Mehrdad Momeny";
+        int copyWidth = font.stringWidth(copyright);
+        g.drawString(copyright, getWidth()/2 - copyWidth/2, getHeight()-fontHeight*2, Graphics.LEFT|Graphics.BOTTOM);
+        String urlLink = "http://opatan.ir/opidentica/";
+        int urlWidth = font.stringWidth(urlLink);
+        g.drawString(urlLink, getWidth()/2 - urlWidth/2, getHeight()-fontHeight, Graphics.LEFT|Graphics.BOTTOM);
+    }
     
 }

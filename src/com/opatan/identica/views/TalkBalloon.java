@@ -75,8 +75,8 @@ public class TalkBalloon {
 
         if(isSelected) {
             g.setColor(0xd7402f);//0x27b3c6
-            g.drawRoundRect(x-0, y-0, textWidth + fontHeight + 0, textHeight + 0, 10, 10);
-            g.drawRoundRect(x-1, y-1, textWidth + fontHeight + 2, textHeight + 2, 10, 10);
+            g.drawRoundRect(x-0, y-0, textWidth + fontHeight + 0, textHeight + 0, 7, 7);
+            g.drawRoundRect(x-1, y-1, textWidth + fontHeight + 2, textHeight + 2, 7, 7);
             /*int size = (fontHeight)/2;
             g.fillTriangle(
                 x-size, y + textHeight/2 - size/2,
@@ -85,7 +85,7 @@ public class TalkBalloon {
              */
         } else {
             g.setColor(BORDER_COLOR);
-            g.drawRoundRect(x, y, textWidth + fontHeight, textHeight, 5, 5);
+            g.drawRoundRect(x, y, textWidth + fontHeight, textHeight, 7, 7);
         }
 
         // Draw the small triangle on the bottom of the balloon
