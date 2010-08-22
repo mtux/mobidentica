@@ -60,7 +60,7 @@ public class UpdateStatusTextBox extends TextBox implements CommandListener {
             controller.updateStatus(this.getString(), inReplyToId);
             inReplyToId = "";
         } else {
-            controller.showRecentTimeline();
+            controller.showCurrentTimeline();
         }
     }
 
