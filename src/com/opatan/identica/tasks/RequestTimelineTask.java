@@ -59,23 +59,23 @@ public class RequestTimelineTask extends AbstractTask {
         if(feedType==FEED_FRIENDS) {
             Vector friendsTimeline = api.requestFriendsTimeline();
             controller.setRecentTimeline( friendsTimeline );
-            controller.showTimeline( friendsTimeline );
+//            controller.showTimeline( friendsTimeline );
         } else if(feedType==FEED_ARCHIVE) {
             Vector archiveTimeline = api.requestUserTimeline();
             controller.setUserTimeline( archiveTimeline );
-            controller.showTimeline( archiveTimeline );
+//            controller.showTimeline( archiveTimeline );
         } else if(feedType==FEED_RESPONSES) {
             Vector responsesTimeline = api.requestResponsesTimeline();
             controller.setResponsesTimeline( responsesTimeline );
-            controller.showTimeline( responsesTimeline );
+//            controller.showTimeline( responsesTimeline );
         } else if(feedType==FEED_PUBLIC) {
             Vector publicTimeline = api.requestPublicTimeline();
             controller.setPublicTimeline( publicTimeline );
-            controller.showTimeline( publicTimeline );
+//            controller.showTimeline( publicTimeline );
         } else if(feedType==FEED_DIRECT) {
             Vector directTimeline = api.requestDirectTimeline();
             controller.setDirectTimeline(directTimeline);
-            controller.showTimeline( directTimeline );
+//            controller.showTimeline( directTimeline );
         }
         
     }

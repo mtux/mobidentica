@@ -181,14 +181,6 @@ public class IdenticaController {
             showRecentTimeline();
     }
 
-    public void setPublicTimeline(Vector publicTimeline) {
-        this.publicTimeline = publicTimeline;
-    }
-
-    public void setResponsesTimeline(Vector responsesTimeline) {
-        this.responsesTimeline = responsesTimeline;
-    }
-
     public void setServiceUrl(String url) {
         api.setUrl( url );
     }
@@ -197,16 +189,54 @@ public class IdenticaController {
         return api.getUrl();
     }
 
+    public void setPublicTimeline(Vector publicTimeline) {
+        if(this.publicTimeline.isEmpty())
+            this.publicTimeline = publicTimeline;
+        else
+            this.publicTimeline = updateTimelineElements(this.publicTimeline, publicTimeline);
+        timeline.showCurrentTimeline();
+    }
+
+    public void setResponsesTimeline(Vector responsesTimeline) {
+        if(this.responsesTimeline.isEmpty())
+            this.responsesTimeline = responsesTimeline;
+        else
+            this.responsesTimeline = updateTimelineElements(this.responsesTimeline, responsesTimeline);
+        timeline.showCurrentTimeline();
+    }
+
     public void setUserTimeline(Vector archiveTimeline) {
-        this.archiveTimeline = archiveTimeline;
+        if(this.archiveTimeline.isEmpty())
+            this.archiveTimeline = archiveTimeline;
+        else
+            this.archiveTimeline = updateTimelineElements(this.archiveTimeline, archiveTimeline);
+        timeline.showCurrentTimeline();
     }
 
     public void setDirectTimeline(Vector directTimeline) {
-        this.directTimeline = directTimeline;
+        if(this.directTimeline.isEmpty())
+            this.directTimeline = directTimeline;
+        else
+            this.directTimeline = updateTimelineElements(this.directTimeline, directTimeline);
+        timeline.showCurrentTimeline();
+    }
+
+    /**
+     * Set friends time line entries.
+     * @param friendsTimeline
+     */
+    public void setRecentTimeline(Vector friendsTimeline) {
+        if(this.recentTimeline.isEmpty())
+            this.recentTimeline = friendsTimeline;
+        else
+            this.recentTimeline = updateTimelineElements(this.recentTimeline, friendsTimeline);
+        timeline.showCurrentTimeline();
+//        showTimeline(recentTimeline);
     }
 
     public void setFriendsStatuses(Vector friendStatuses) {
         this.friendsStatuses = friendStatuses;
+        timeline.showCurrentTimeline();
     }
 
     public void showError(String string) {
@@ -410,14 +440,6 @@ public class IdenticaController {
         timeline.setTimeline(responsesTimeline);
     }
     
-    /** 
-     * Set friends time line entries.
-     * @param friendsTimeline 
-     */
-    public void setRecentTimeline(Vector friendsTimeline) {
-        this.recentTimeline = friendsTimeline;
-    }
-    
     /** Show login form */
     public void showLoginForm() {
         SettingsForm loginForm = new SettingsForm( this );
@@ -444,4 +466,16 @@ public class IdenticaController {
 //        display.setCurrent(splash);
     }
 
+    Vector updateTimelineElements(Vector target, Vector newStatuses) {
+        Log.add("IdenticaController::updateTimelineElements");
+        while( !newStatuses.isEmpty() ){
+            Object elm = newStatuses.lastElement();
+            newStatuses.removeElement(elm);
+            if( !target.contains(elm) ) {
+                target.insertElementAt(elm, 0);
+                target.removeElement(target.lastElement());
+            }
+        }
+        return target;
+    }
 }

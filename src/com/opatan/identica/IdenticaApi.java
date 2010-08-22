@@ -24,6 +24,7 @@ import com.opatan.utils.HttpUtil;
 import com.opatan.utils.Log;
 import com.opatan.utils.URLUTF8Encoder;
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.Vector;
 
 /**
@@ -44,6 +45,7 @@ public class IdenticaApi {
     private static final String STATUS_UPDATE_URL = "/api/statuses/update.xml";
     private static final String DIRECT_TIMELINE_URL = "/api/direct_messages.xml";
     private static final String FRIENDS_URL = "/api/statuses/friends.xml";
+    private Hashtable latestStatusId = new Hashtable(8);
 
     /** Creates a new instance of identi.ca API */
     public IdenticaApi() {
@@ -204,7 +206,7 @@ public class IdenticaApi {
         if(serviceUrl==null || serviceUrl.length()==0) {
             IdenticaController controller = IdenticaController.getInstance();
             controller.showError("Service URL is not defined. "
-                    + "Please define it in login form.");
+                    + "Please define it in Settings form.");
             return null;
         }
         
@@ -212,13 +214,19 @@ public class IdenticaApi {
             HttpUtil.setBasicAuthentication(username, password);
             StatusFeedParser parser = new StatusFeedParser();
             String url = serviceUrl + timelineUrl + "?count=" + count;
+            if(latestStatusId.containsKey(timelineUrl)){
+                url += "&since_id=" + latestStatusId.get(timelineUrl).toString();
+            }
             HttpUtil.doGet( url, parser);
             entries = parser.getStatuses();
+            latestStatusId.put(timelineUrl, ((Status)entries.firstElement()).getId());
+            Log.add("identicaApi::requestTimeline: "+((Status)entries.firstElement()).getId());
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        Log.add("Finished requestTimeline, Count: " + entries.size());
         return entries;
     }
     
