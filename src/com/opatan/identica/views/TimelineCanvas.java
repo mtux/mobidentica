@@ -46,7 +46,6 @@ public class TimelineCanvas extends Canvas {
     private Menu statusMenu;
     private int verticalScroll;
     private Image logoImage;
-    private Graphics canvasGraphics;
     
     /** 
      * Creates a new instance of TimelineCanvas
@@ -82,7 +81,6 @@ public class TimelineCanvas extends Canvas {
     }
 
     protected void paint(Graphics g) {
-        canvasGraphics = g;
         g.setColor(Theme.BACKGROUND_COLOR);
         g.fillRect(0, 0, getWidth(), getHeight());
 
