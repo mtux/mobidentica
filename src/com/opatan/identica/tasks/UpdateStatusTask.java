@@ -75,14 +75,14 @@ public class UpdateStatusTask extends AbstractTask {
         try {
             Status updatedStatus = api.updateStatus(status, inReplyTo);
             if(updatedStatus!=null) {
-                controller.addStatus(updatedStatus);
+//                controller.addStatus(updatedStatus);
+                controller.showMessage("Posted!");
                 controller.showCurrentTimeline();
             } else {
                 controller.showStatusView(status, inReplyTo);
             }
         } catch (Exception ex) {
             Log.add(ex.toString());
-
         }
     }
     

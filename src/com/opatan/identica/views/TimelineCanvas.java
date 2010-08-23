@@ -26,7 +26,6 @@ import com.opatan.identica.model.Status;
 import com.opatan.utils.ImageUtil;
 import java.util.Vector;
 import javax.microedition.lcdui.Canvas;
-//import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
@@ -46,6 +45,7 @@ public class TimelineCanvas extends Canvas {
     private Menu statusMenu;
     private int verticalScroll;
     private Image logoImage;
+    private String message;
     
     /** 
      * Creates a new instance of TimelineCanvas
@@ -56,7 +56,7 @@ public class TimelineCanvas extends Canvas {
         setFullScreenMode(true);
         
         /** Menu bar tabs */
-        String[] labels = {"Archive", "Replies", "Recent", "Direct", "Friends", "Public"};
+        String[] labels = {"Archive", "Replies", "Recent", "Direct", "Public"};
         menuBar = new TabBar(2, labels, getWidth());
         
         /** Menu */
@@ -100,6 +100,16 @@ public class TimelineCanvas extends Canvas {
         } else if(statusMenu.isActive()) {
             statusMenu.draw(g);
         }
+        if(!message.equals("")){
+            g.setColor(0x27b3c6);
+            Font textFont = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL);
+            g.setFont(textFont);
+            int w = textFont.stringWidth(message);
+            int h = textFont.getHeight();
+            g.fillRoundRect(0, 0, w, h, 3, 3);
+            g.setColor(0xFFFFFF);
+            g.drawString(message, 0, 0, Graphics.VCENTER | Graphics.HCENTER);
+        }
     }
 
     public void showCurrentTimeline() {
@@ -126,9 +136,6 @@ public class TimelineCanvas extends Canvas {
                 controller.showDirectMessages();
                 break;
             case 4:
-                controller.showFriends();
-                break;
-            case 5:
                 controller.showPublicTimeline();
                 break;
         }
@@ -153,9 +160,6 @@ public class TimelineCanvas extends Canvas {
                 controller.updateDirectMessages();
                 break;
             case 4:
-                controller.updateFriends();
-                break;
-            case 5:
                 controller.updatePublicTimeline();
                 break;
         }
@@ -266,13 +270,13 @@ public class TimelineCanvas extends Canvas {
         if(gameAction == Canvas.LEFT) {
             menuBar.selectPreviousTab();
             handleTabChange();
-            repaint();
-            return;
+//            repaint();
+//            return;
         } else if(gameAction == Canvas.RIGHT) {
             menuBar.selectNextTab();
             handleTabChange();
-            repaint();
-            return;
+//            repaint();
+//            return;
         } else if(gameAction == Canvas.FIRE) {
             
             if(menu.isActive()) {
@@ -309,21 +313,34 @@ public class TimelineCanvas extends Canvas {
             updateCurrentTimeline();
         }
         handleUpAndDownKeys(keyCode);
+        clearMessage();
         repaint();
     }
     
     public void drawBackground(Graphics g) {
-        g.drawImage(logoImage, getWidth()/2, getHeight()/2, Graphics.HCENTER|Graphics.VCENTER);
+        g.drawImage(logoImage, getWidth()/2, getHeight()/2 - 10, Graphics.HCENTER|Graphics.VCENTER);
         g.setColor(0xBBBBBB);
         Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL );
         g.setFont( font );
         int fontHeight = font.getHeight();
         String copyright = "© 2010 Mehrdad Momeny";
         int copyWidth = font.stringWidth(copyright);
-        g.drawString(copyright, getWidth()/2 - copyWidth/2, getHeight()-fontHeight*2, Graphics.LEFT|Graphics.BOTTOM);
+        g.drawString(copyright, getWidth()/2 - copyWidth/2, getHeight()-fontHeight*2 - 10, Graphics.LEFT|Graphics.BOTTOM);
         String urlLink = "http://opatan.ir/opidentica/";
         int urlWidth = font.stringWidth(urlLink);
-        g.drawString(urlLink, getWidth()/2 - urlWidth/2, getHeight()-fontHeight, Graphics.LEFT|Graphics.BOTTOM);
+        g.drawString(urlLink, getWidth()/2 - urlWidth/2, getHeight()-fontHeight - 10, Graphics.LEFT|Graphics.BOTTOM);
+    }
+
+    public void showMessage(String text) {
+        message = text;
+        repaint();
+//        Timer t = new Timer();
+//        HideMessageTask task = new HideMessageTask(this);
+//        t.schedule(task, 2);
+    }
+
+    public void clearMessage(){
+        message = "";
     }
     
 }

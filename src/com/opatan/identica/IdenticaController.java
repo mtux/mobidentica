@@ -478,4 +478,8 @@ public class IdenticaController {
         }
         return target;
     }
+
+    public void showMessage(String msg) {
+        timeline.showMessage(msg);
+    }
 }

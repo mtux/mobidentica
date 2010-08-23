@@ -39,7 +39,7 @@ public class AboutCanvas extends Canvas {
         this.setFullScreenMode(true);
         this.controller = controller;
         texts = new String[4];
-        texts[0] = "Opidentica v1.3 (http://opatan.ir/opidentica)";
+        texts[0] = "Opidentica v1.4 (http://opatan.ir/opidentica)";
         texts[1] = "Copyright 2010 Mehrdad Momeny";
         texts[2] = "Opidentica is a fork of Mobidentica and sponsored by Opatan";
         texts[3] = HttpTransferStatus.getTotalBytesTransfered() +
