@@ -22,6 +22,7 @@ package com.opatan.identica.tasks;
 import com.opatan.tasks.AbstractTask;
 import com.opatan.identica.IdenticaApi;
 import com.opatan.identica.IdenticaController;
+import com.opatan.identica.Settings;
 import com.opatan.identica.model.Status;
 import com.opatan.utils.Log;
 
@@ -77,7 +78,10 @@ public class UpdateStatusTask extends AbstractTask {
             if(updatedStatus!=null) {
 //                controller.addStatus(updatedStatus);
                 controller.showMessage("Posted!");
-                controller.showCurrentTimeline();
+                if(controller.getSettings().getBooleanProperty(Settings.UPDATE_ON_POST, false))
+                    controller.updateRecentTimeline();
+                else
+                    controller.showCurrentTimeline();
             } else {
                 controller.showStatusView(status, inReplyTo);
             }

@@ -23,7 +23,6 @@ import com.opatan.identica.Settings;
 import com.opatan.identica.IdenticaController;
 import com.opatan.utils.Log;
 import java.io.IOException;
-//import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
@@ -70,10 +69,12 @@ public class SettingsForm extends Form implements CommandListener {
         serviceUrlField = new TextField("Service URL", serviceUrl, 64, TextField.URL);
         append(serviceUrlField);
 
-        String[] lables = {"Load Recent timeline on start"};
+        String[] lables = {"Load Recent on start", "Reload Recent after post"};
         boolean loadOnStart = settings.getBooleanProperty(Settings.UPDATE_ON_START, false);
+        boolean reloadOnPost = settings.getBooleanProperty(Settings.UPDATE_ON_POST, false);
         loadOnStartChoice = new ChoiceGroup("Options", ChoiceGroup.MULTIPLE, lables, null);
         loadOnStartChoice.setSelectedIndex(0, loadOnStart);
+        loadOnStartChoice.setSelectedIndex(1, reloadOnPost);
         append(loadOnStartChoice);
 
         String count = settings.getStringProperty(Settings.NUM_OF_DENTS, "20");
