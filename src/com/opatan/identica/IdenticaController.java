@@ -29,12 +29,13 @@ import com.opatan.identica.tasks.UpdateStatusTask;
 import com.opatan.identica.tasks.SetAsFavoriteTask;
 import com.opatan.identica.views.AboutCanvas;
 import com.opatan.identica.views.SettingsForm;
-//import com.opatan.identica.views.SplashCanvas;
 import com.opatan.identica.views.TimelineCanvas;
 import com.opatan.identica.views.UpdateStatusTextBox;
 import com.opatan.identica.views.WaitCanvas;
+import com.opatan.utils.HttpUtil;
 import com.opatan.utils.Log;
 import java.io.IOException;
+import java.lang.Exception;
 import java.util.Enumeration;
 import java.util.Vector;
 import javax.microedition.lcdui.Alert;
@@ -115,6 +116,10 @@ public class IdenticaController {
         display.setCurrent(canvas);
     }
 
+    public void setDisplay(Displayable newDisp) {
+        display.setCurrent(newDisp);
+    }
+
     public void addStatus(Status status) {
         if(recentTimeline!=null) {
             recentTimeline.insertElementAt(status, 0);
@@ -175,10 +180,7 @@ public class IdenticaController {
         api.setPassword(password);
         api.setUrl(serviceUrl);
         api.setCount(settings.getStringProperty(Settings.NUM_OF_DENTS, "20") );
-        if(settings.getBooleanProperty(Settings.UPDATE_ON_START, false))
-            updateRecentTimeline();
-        else
-            showRecentTimeline();
+        showRecentTimeline();
     }
 
     public void setServiceUrl(String url) {
@@ -240,10 +242,14 @@ public class IdenticaController {
     }
 
     public void showError(String string) {
+        showError(string, timeline);
+    }
+
+    public void showError(String string, Displayable nextDisplay){
         Alert alert = new Alert("Error");
         alert.setString(string);
         alert.setTimeout(Alert.FOREVER);
-        display.setCurrent(alert, timeline);
+        display.setCurrent(alert, nextDisplay);
     }
 
     /** Show friends */
@@ -459,11 +465,22 @@ public class IdenticaController {
         String serviceUrl = settings.getStringProperty(Settings.SERVICE_URL, "http://laconi.ca");
         if(username.length()>0) {
             login(username, password, serviceUrl);
+            updateRecentTimeline();
         } else {
             showLoginForm();
         }
-//        SplashCanvas splash = new SplashCanvas(this);
-//        display.setCurrent(splash);
+//            if(settings.getBooleanProperty(Settings.UPDATE_ON_START, false)) {
+//                Log.add("Updating recent timeline on start");
+//                updateRecentTimeline();
+//            } else {
+//                Log.add("Fetching a test page");
+//                try{
+//                HttpUtil.doGet("http://gnufolks.org/test");
+//                } catch(Exception ex){
+//                    showError(ex.getMessage());
+//                    Log.add(ex.getMessage());
+//                }
+//            }
     }
 
     Vector updateTimelineElements(Vector target, Vector newStatuses) {
