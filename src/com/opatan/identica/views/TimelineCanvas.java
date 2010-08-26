@@ -24,6 +24,7 @@ import com.opatan.identica.IdenticaController;
 import com.opatan.identica.Settings;
 import com.opatan.identica.model.Status;
 import com.opatan.utils.ImageUtil;
+//import com.opatan.utils.Log;
 import java.util.Vector;
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Font;
@@ -46,6 +47,9 @@ public class TimelineCanvas extends Canvas {
     private int verticalScroll;
     private Image logoImage;
     private String message;
+    private int[] scrollbars = {0, 0, 0, 0, 0};
+    public int currentTab;
+
     
     /** 
      * Creates a new instance of TimelineCanvas
@@ -58,6 +62,7 @@ public class TimelineCanvas extends Canvas {
         /** Menu bar tabs */
         String[] labels = {"Archive", "Replies", "Recent", "Direct", "Public"};
         menuBar = new TabBar(2, labels, getWidth());
+        currentTab = 2;
         
         /** Menu */
         String[] menuLabels = {"Update status", "Reload items", "Settings", "About", "Exit", "Cancel"};
@@ -123,9 +128,14 @@ public class TimelineCanvas extends Canvas {
     private void handleTabChange() {
 
         menuBar.activateSelectedTab();
-
-        verticalScroll = 0;
         int tabIndex = menuBar.getSelectedTabIndex();
+        if(tabIndex != currentTab){
+//            Log.add("handleTabChange: "+String.valueOf(verticalScroll));
+//            Log.add("handleTabChange: "+String.valueOf(scrollbars[tabIndex]));
+            scrollbars[currentTab] = verticalScroll;
+            verticalScroll = scrollbars[tabIndex];
+            currentTab = tabIndex;
+        }
         switch(tabIndex){
             case 0:
                 controller.showArchiveTimeline();
@@ -148,7 +158,7 @@ public class TimelineCanvas extends Canvas {
     }
 
     private void updateCurrentTimeline() {
-        verticalScroll = 0;
+//        verticalScroll = 0;
         int tabIndex = menuBar.getSelectedTabIndex();
         switch(tabIndex){
             case 0:
