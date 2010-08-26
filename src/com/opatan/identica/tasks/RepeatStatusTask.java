@@ -45,7 +45,7 @@ public class RepeatStatusTask extends AbstractTask {
         try {
             Status updatedStatus = api.repeat(statusId);
             if(updatedStatus!=null) {
-                controller.addStatus(updatedStatus);
+                controller.showMessage("Repeated!");
             }
         } finally {
             if(controller.getCurrentDisplay() == this.waitCanvas);

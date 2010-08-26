@@ -3,6 +3,8 @@
  *
  * Copyright (C) 2005-2008 Tommi Laukkanen
  * http://www.substanceofcode.com
+ * Copyright (C) 2010 Mehrdad Momeny
+ * http://momeny.wordpress.com
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +34,10 @@ import com.opatan.identica.views.SettingsForm;
 import com.opatan.identica.views.TimelineCanvas;
 import com.opatan.identica.views.UpdateStatusTextBox;
 import com.opatan.identica.views.WaitCanvas;
-import com.opatan.utils.HttpUtil;
+//import com.opatan.utils.HttpUtil;
 import com.opatan.utils.Log;
 import java.io.IOException;
-import java.lang.Exception;
+//import java.lang.Exception;
 import java.util.Enumeration;
 import java.util.Vector;
 import javax.microedition.lcdui.Alert;

@@ -3,7 +3,9 @@
  *
  * Copyright (C) 2005-2009 Tommi Laukkanen
  * http://www.substanceofcode.com
- *
+ * Copyright (C) 2010 Mehrdad Momeny
+ * http://momeny.wordpress.com
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -107,7 +109,7 @@ public class TimelineCanvas extends Canvas {
         }
         if(!message.equals("")){
             g.setColor(0x27b3c6);
-            Font textFont = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL);
+            Font textFont = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_LARGE);
             g.setFont(textFont);
             int w = textFont.stringWidth(message) + 10;
             int h = textFont.getHeight() + 4;
