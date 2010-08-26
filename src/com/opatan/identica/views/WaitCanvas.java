@@ -63,6 +63,7 @@ public class WaitCanvas extends Canvas implements Runnable {
         this.controller = controller;
         this.waitText = "Please wait...";
         this.task = task;
+        this.task.setWaitCanvas(this);
         isTaskCanceled = false;
         this.talkBalloon = new TalkBalloon(getWidth(), getHeight());
         this.loadingImage = ImageUtil.loadImage("/images/loading.png");
