@@ -19,7 +19,7 @@
 
 package com.opatan.identica;
 
-import com.opatan.utils.Log;
+//import com.opatan.utils.Log;
 import java.io.*;
 import java.util.*;
 import javax.microedition.midlet.*;
@@ -49,8 +49,6 @@ public class Settings {
     public static final String PASSWORD = "password";
     public static final String SERVICE_URL = "service";
     public static final String NUM_OF_DENTS = "count";
-    public static final String UPDATE_ON_START = "updateOnStart";
-    public static final String UPDATE_ON_POST = "updateOnPost";
 
 	/**
 	 * Singleton pattern is used to return 

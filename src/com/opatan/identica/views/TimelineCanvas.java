@@ -104,11 +104,15 @@ public class TimelineCanvas extends Canvas {
             g.setColor(0x27b3c6);
             Font textFont = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL);
             g.setFont(textFont);
-            int w = textFont.stringWidth(message);
-            int h = textFont.getHeight();
-            g.fillRoundRect(0, 0, w, h, 3, 3);
+            int w = textFont.stringWidth(message) + 10;
+            int h = textFont.getHeight() + 4;
+            int x = getWidth()/2 - w/2;
+            int y = getHeight()/2;
+            g.fillRoundRect(x, y, w, h, 7, 7);
+            g.setColor(0x000000);
+            g.drawRoundRect(x, y, w, h, 7, 7);
             g.setColor(0xFFFFFF);
-            g.drawString(message, 0, 0, Graphics.VCENTER | Graphics.HCENTER);
+            g.drawString(message, x + 6, y + 2, Graphics.LEFT | Graphics.TOP);
         }
     }
 

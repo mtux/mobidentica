@@ -465,22 +465,9 @@ public class IdenticaController {
         String serviceUrl = settings.getStringProperty(Settings.SERVICE_URL, "http://laconi.ca");
         if(username.length()>0) {
             login(username, password, serviceUrl);
-            updateRecentTimeline();
         } else {
             showLoginForm();
         }
-//            if(settings.getBooleanProperty(Settings.UPDATE_ON_START, false)) {
-//                Log.add("Updating recent timeline on start");
-//                updateRecentTimeline();
-//            } else {
-//                Log.add("Fetching a test page");
-//                try{
-//                HttpUtil.doGet("http://gnufolks.org/test");
-//                } catch(Exception ex){
-//                    showError(ex.getMessage());
-//                    Log.add(ex.getMessage());
-//                }
-//            }
     }
 
     Vector updateTimelineElements(Vector target, Vector newStatuses) {

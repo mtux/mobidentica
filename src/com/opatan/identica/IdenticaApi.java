@@ -106,6 +106,7 @@ public class IdenticaApi {
     
     public Status updateStatus(String status, String inReplyTo) {
         try {
+            HttpUtil.setBasicAuthentication(username, password);
             StatusFeedParser parser = new StatusFeedParser();
             String url = serviceUrl + STATUS_UPDATE_URL +
                     "?status=" + URLUTF8Encoder.encode(status);
